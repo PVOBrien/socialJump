@@ -32,6 +32,8 @@ public class SocialJumpApplication {
     CommandLineRunner runner() {
         return args -> {
 
+            logger.info("In the runner now...");
+
             Location location1 = new Location("Washington", "agriculture");
             Location location2 = new Location("Silicon Valley", "tech");
             locationRepository.save(location1);
