@@ -29,7 +29,6 @@ public class Person {
         this.location = location;
     }
 
-
     public String getUserName() { return userName; }
     public void setUserName(String userName) { this.userName = userName; }
 
