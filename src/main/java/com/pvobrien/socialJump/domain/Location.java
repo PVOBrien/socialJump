@@ -12,7 +12,7 @@ public class Location {
     private String place, focus;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy="location")
-    private List<User> users;
+    private List<Person> people;
 
     public Location() { }
     public Location(String place, String focus) {
@@ -26,6 +26,6 @@ public class Location {
     public String getFocus() { return focus; }
     public void setFocus(String focus) { this.focus = focus; }
 
-    public List<User> getUsers() { return users; }
-    public void setUsers(List<User> users) { this.users = users; }
+    public List<Person> getUsers() { return people; }
+    public void setUsers(List<Person> people) { this.people = people; }
 }

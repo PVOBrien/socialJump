@@ -1,9 +1,13 @@
 package com.pvobrien.socialJump.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 
 @Entity
-public class User {
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) // // so that it doesn't serialize loop... goes with the @JsonIgnore attached to Location location entry.
+public class Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -12,12 +16,13 @@ public class User {
     private int number;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore // this is partnered with @JsonIgnoreProperties on the class.
     @JoinColumn(name = "location")
     private Location location;
 
-    public User() { } // gotta have an empty public constructor
+    public Person() { } // gotta have an empty public constructor
 
-    public User(String userName, int number, Location location) {
+    public Person(String userName, int number, Location location) {
         this.userName = userName;
         this.number = number;
         this.favoriteColor = "color";
