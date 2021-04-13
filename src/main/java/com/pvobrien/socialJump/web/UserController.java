@@ -12,7 +12,7 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    @RequestMapping("/users")
+    @RequestMapping("/users") // best place to see this in console browser is via the network panel
     public Iterable<User> getUser() {
         return userRepository.findAll();
     }
