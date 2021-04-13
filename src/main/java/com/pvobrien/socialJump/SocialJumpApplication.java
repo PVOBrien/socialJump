@@ -1,9 +1,6 @@
 package com.pvobrien.socialJump;
 
-import com.pvobrien.socialJump.domain.Location;
-import com.pvobrien.socialJump.domain.LocationRepository;
-import com.pvobrien.socialJump.domain.Person;
-import com.pvobrien.socialJump.domain.PersonRepository;
+import com.pvobrien.socialJump.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -17,6 +14,9 @@ public class SocialJumpApplication {
 
     @Autowired
     PersonRepository personRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     LocationRepository locationRepository;
@@ -40,6 +40,10 @@ public class SocialJumpApplication {
             personRepository.save(new Person("the Pal", 5, location1));
             personRepository.save(new Person("the Gracie", 2, location1));
             personRepository.save(new Person("the Shawn", 7, location2));
+
+            userRepository.save(new User("username1", "$2y$17$gYDwavVOy08RI93V3WlBGe87fPtVNWSZcX8zCFHf2XgZ4zk3dhM/.", "USER"));
+            userRepository.save(new User("username2", "$2y$17$gYDwavVOy08RI93V3WlBGe87fPtVNWSZcX8zCFHf2XgZ4zk3dhM/.", "ADMIN"));
+
         };
     }
 }
