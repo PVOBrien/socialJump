@@ -28,4 +28,7 @@ public class Location {
 
     public List<Person> getUsers() { return people; }
     public void setUsers(List<Person> people) { this.people = people; }
+
+    public long getLocationId() { return locationId; }
+    public void setLocationId(long locationId) { this.locationId = locationId; }
 }
