@@ -20,9 +20,11 @@ public class PersonRepoTest {
     @Autowired
     private TestEntityManager entityManager;
 
+    @Autowired // each repo requires it's own @Autowired annotation. fyi.
+    private LocationRepository locationRepository;
+
     @Autowired
     private PersonRepository personRepository;
-    private LocationRepository locationRepository;
 
     @DisplayName("Save a user to the database.")
     @Test
@@ -30,9 +32,24 @@ public class PersonRepoTest {
         Location location = new Location("Washington", "jobs");
         Person person = new Person("thisPerson", 42, location);
 
-        entityManager.persist(location);
+        entityManager.persistAndFlush(location);
         assertThat(location.getLocationId()).isNotNull();
         entityManager.persistAndFlush(person);
-        entityManager.flush();
+        assertThat(person.getId()).isNotNull();
+    }
+
+    @DisplayName("Delete user from database.")
+    @Test
+    public void deletePerson() {
+        Location location = new Location("Washington", "jobs"); // if you don't include Location + ...Repo, this will fail.
+        Person person = new Person("thisPerson", 42, location);
+
+        entityManager.persistAndFlush(location);
+        entityManager.persistAndFlush(person);
+
+        personRepository.deleteAll(); // the deleteAll() order is specific. Cannot delete location before person due to Location's CascadeType.
+        locationRepository.deleteAll();
+        assertThat(locationRepository.findAll()).isEmpty();
+        assertThat(personRepository.findAll()).isEmpty();
     }
 }

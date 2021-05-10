@@ -15,6 +15,7 @@ public class Location {
     private List<Person> people;
 
     public Location() { }
+
     public Location(String place, String focus) {
         this.place = place;
         this.focus = focus;
